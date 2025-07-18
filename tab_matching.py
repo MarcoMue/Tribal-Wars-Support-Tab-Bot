@@ -1,16 +1,19 @@
 import base64
-from datetime import datetime, timedelta
-from typing import List, Dict
+import copy
+import gzip
+import tkinter as tk
 from dataclasses import dataclass
+from datetime import datetime, timedelta
+from io import BytesIO
+from tkinter import ttk
+from typing import Dict, List
+
+import pytz
+import requests
+
 from distanz_rechner import DistanzRechner
 from einheiten import get_laufzeit
-import gzip
-import requests
-from io import BytesIO
-import pytz
-import copy
-import tkinter as tk
-from tkinter import ttk
+
 
 @dataclass
 class TabMatch:
@@ -91,6 +94,9 @@ class TabMatching:
 
                         # Prüfen, ob die tabrelevanten Einheiten vorhanden sind (Späher NICHT relevant für Ausschluss)
                         if not all(dorf.rest_truppen.get(e, 0) >= m for e, m in kandidat.items()):
+                            continue
+
+                        if not kandidat:
                             continue
 
                         lz = max(get_laufzeit(e, welt_speed, einheiten_speed) for e in kandidat)
