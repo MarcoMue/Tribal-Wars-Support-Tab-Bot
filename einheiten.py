@@ -27,7 +27,7 @@ einheiten_aliases = {
 }
 
 
-def get_laufzeit(name: str, welt_speed: float = 1.0, einheiten_speed: float = 1.0) -> float:
+def get_laufzeit(name: str, welt_speed: float = 1.0, einheiten_speed: float = 1.0, boost_multiplier: float = 1.0) -> float:
     # zuerst Normalisierung: lowercase + Sonderzeichen ersetzen
     key = (
         name.strip()
@@ -47,5 +47,4 @@ def get_laufzeit(name: str, welt_speed: float = 1.0, einheiten_speed: float = 1.
     if name not in laufzeiten_pro_feld:
         raise ValueError(f"Einheit '{name}' nicht bekannt (aus Originaleingabe: '{key}')")
 
-    return laufzeiten_pro_feld[name] / (welt_speed * einheiten_speed)
-
+    return laufzeiten_pro_feld[name] / (welt_speed * einheiten_speed * boost_multiplier)

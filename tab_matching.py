@@ -34,7 +34,7 @@ class TabMatching:
         einheiten_speed: float = 1.0,
         zeitfenster_von: datetime = None,
         zeitfenster_bis: datetime = None,
-        boost_level: int = 0
+        boost_level: int = 1
     ) -> List[TabMatch]:
         print(f"[INFO] {len(angriffe)} Angriffe, {len(eigene_dörfer)} eigene Dörfer verarbeitet")
 
@@ -99,7 +99,7 @@ class TabMatching:
                         if not kandidat:
                             continue
 
-                        lz = max(get_laufzeit(e, welt_speed, einheiten_speed) for e in kandidat)
+                        lz = max(get_laufzeit(e, welt_speed, einheiten_speed, boost_level) for e in kandidat)
                         abschick = ankunftszeit - timedelta(minutes=distanz * lz)
 
                         # Zeitfensterprüfung
@@ -116,7 +116,7 @@ class TabMatching:
                             abschickzeit=abschick,
                             ankunftszeit=ankunftszeit,
                             einheiten=kandidat_mit_spaeh,
-                            einheit_kuerzel=max(kandidat, key=lambda e: get_laufzeit(e, welt_speed, einheiten_speed))
+                            einheit_kuerzel=max(kandidat, key=lambda e: get_laufzeit(e, welt_speed, einheiten_speed, boost_level))
                         )
                         moegliche_tabs.append((abschick, distanz, tab))
 
