@@ -57,7 +57,7 @@ jobs:
           }
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: StammGui-${{ github.sha }}
           path: dist/StammGui.exe
@@ -65,7 +65,7 @@ jobs:
 
       - name: Upload build logs (if build fails)
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-logs-${{ github.sha }}
           path: |
