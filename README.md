@@ -15,9 +15,20 @@ Ein Desktop-Tool für "Die Stämme" (Tribal Wars) zur Berechnung optimaler Unter
 
 ### Option 1: Ausführbare Datei (.exe)
 
-1. Lade die neueste Version aus dem `dist/` Ordner herunter
-2. Führe `StammGui.exe` aus
-3. Keine Python-Installation erforderlich!
+1. **Download von GitHub Actions:**
+
+   - Gehe zu den [GitHub Actions](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/actions)
+   - Wähle den neuesten erfolgreichen Build
+   - Lade das Artifact "StammGui-Windows" herunter
+
+2. **Download von Releases:**
+
+   - Gehe zu den [Releases](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/releases)
+   - Lade die neueste Version herunter
+
+3. **Ausführung:**
+   - Führe `StammGui.exe` aus
+   - Keine Python-Installation erforderlich!
 
 ### Option 2: Python-Skript
 
@@ -91,7 +102,31 @@ Tribal-Wars-Support-Tab-Bot/
 
 ## 🔧 Entwicklung
 
-### .exe-Datei erstellen
+### Automatische Builds (GitHub Actions)
+
+Das Repository verwendet GitHub Actions für automatische Builds:
+
+- **Build Workflow**: Erstellt bei jedem Push eine .exe-Datei
+- **Release Workflow**: Erstellt automatische Releases bei Git-Tags
+- **Artifacts**: Downloadbare .exe-Dateien für jeden Build
+
+#### Artifact Download
+
+1. Gehe zu [GitHub Actions](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/actions)
+2. Wähle einen erfolgreichen Build
+3. Lade das "StammGui-Windows" Artifact herunter
+
+#### Release erstellen
+
+```bash
+# Erstelle einen neuen Tag für Release
+git tag v1.0.0
+git push origin v1.0.0
+
+# GitHub Actions erstellt automatisch ein Release mit der .exe-Datei
+```
+
+### Lokale .exe-Datei erstellen
 
 ```bash
 # Mit vorhandener Spec-Datei (empfohlen)
