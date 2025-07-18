@@ -1,13 +1,12 @@
-name: Build EXE
+name: Build and Release
 
 on:
   push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
 
 jobs:
-  build-windows:
+  build:
     runs-on: windows-latest
 
     steps:
@@ -20,7 +19,7 @@ jobs:
           python-version: "3.10"
 
       - name: Cache pip dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -56,14 +55,36 @@ jobs:
             exit 1 
           }
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: StammGui-${{ github.sha }}
-          path: dist/StammGui.exe
-          if-no-files-found: error
+          files: dist/StammGui.exe
+          body: |
+            🚀 **Tribal Wars Support Tab Bot - Release ${{ github.ref_name }}**
 
-      - name: Upload build logs (if build fails)
+            ## 📦 Download
+            - **Windows**: `StammGui.exe` (keine Installation erforderlich)
+
+            ## 🎯 Features
+            - SOS-Anfragen parsen und analysieren
+            - Optimale Tab-Berechnung für Unterstützung
+            - Export für DS Ultimate Browser-Erweiterung
+            - Automatisches Laden der Weltgeschwindigkeiten
+
+            ## 🔧 Installation
+            1. Download `StammGui.exe`
+            2. Ausführen - keine weitere Installation nötig!
+            3. Welt-ID eingeben und loslegen
+
+            ## 📋 Changelog
+            Siehe [Commit-History](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/commits/${{ github.ref_name }}) für detaillierte Änderungen.
+
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload build logs (on failure)
         if: failure()
         uses: actions/upload-artifact@v4
         with:

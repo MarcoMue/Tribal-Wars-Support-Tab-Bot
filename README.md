@@ -15,19 +15,11 @@ Ein Desktop-Tool für "Die Stämme" (Tribal Wars) zur Berechnung optimaler Unter
 
 ### Option 1: Ausführbare Datei (.exe)
 
-1. **Download von GitHub Actions:**
-
-   - Gehe zu den [GitHub Actions](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/actions)
-   - Wähle den neuesten erfolgreichen Build
-   - Lade das Artifact "StammGui-Windows" herunter
-
-2. **Download von Releases:**
-
+1. **Download von GitHub Releases:**
    - Gehe zu den [Releases](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/releases)
    - Lade die neueste Version herunter
-
-3. **Ausführung:**
    - Führe `StammGui.exe` aus
+   - Keine Python-Installation erforderlich!
    - Keine Python-Installation erforderlich!
 
 ### Option 2: Python-Skript
@@ -102,19 +94,13 @@ Tribal-Wars-Support-Tab-Bot/
 
 ## 🔧 Entwicklung
 
-### Automatische Builds (GitHub Actions)
+### Automatische Releases (GitHub Actions)
 
-Das Repository verwendet GitHub Actions für automatische Builds:
+Das Repository verwendet GitHub Actions für automatische Releases:
 
-- **Build Workflow**: Erstellt bei jedem Push eine .exe-Datei
-- **Release Workflow**: Erstellt automatische Releases bei Git-Tags
-- **Artifacts**: Downloadbare .exe-Dateien für jeden Build
-
-#### Artifact Download
-
-1. Gehe zu [GitHub Actions](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/actions)
-2. Wähle einen erfolgreichen Build
-3. Lade das "StammGui-Windows" Artifact herunter
+- **Release Workflow**: Erstellt bei Git-Tags automatisch Releases mit .exe-Datei
+- **Download**: Direkt von der GitHub Releases-Seite
+- **Trigger**: Nur bei neuen Version-Tags (z.B. `v1.0.0`)
 
 #### Release erstellen
 
@@ -123,8 +109,17 @@ Das Repository verwendet GitHub Actions für automatische Builds:
 git tag v1.0.0
 git push origin v1.0.0
 
-# GitHub Actions erstellt automatisch ein Release mit der .exe-Datei
+# GitHub Actions erstellt automatisch:
+# 1. Build der .exe-Datei
+# 2. GitHub Release mit deutscher Beschreibung
+# 3. Upload der .exe-Datei zum Release
 ```
+
+#### Download für Benutzer
+
+1. Gehe zu [Releases](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/releases)
+2. Lade `StammGui.exe` aus dem neuesten Release herunter
+3. Keine weitere Installation nötig!
 
 ### Lokale .exe-Datei erstellen
 
