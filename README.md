@@ -20,7 +20,6 @@ Ein Desktop-Tool für "Die Stämme" (Tribal Wars) zur Berechnung optimaler Unter
    - Lade die neueste Version herunter
    - Führe `StammGui.exe` aus
    - Keine Python-Installation erforderlich!
-   - Keine Python-Installation erforderlich!
 
 ### Option 2: Python-Skript
 
@@ -186,10 +185,6 @@ Die Anwendung verarbeitet deutschen Spieltext und koordiniert mit der deutschen 
 - Automatisches Laden von Welt- und Einheiten-Geschwindigkeiten
 - Unterstützung für verschiedene Geschwindigkeits-Einstellungen
 
-## 📝 Lizenz
-
-Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für Details.
-
 ## 🤝 Beitragen
 
 Beiträge sind willkommen! Bitte erstelle einen Pull Request oder öffne ein Issue.
@@ -206,12 +201,6 @@ Bei Fragen oder Problemen:
 
 - Öffne ein [Issue](https://github.com/MarcoMue/Tribal-Wars-Support-Tab-Bot/issues)
 - Kontaktiere den Entwickler
-
-## 🏆 Danksagungen
-
-- Die Stämme Community für Feedback und Tests
-- DS Ultimate Entwickler für die Integration
-- PyInstaller für die Executable-Erstellung
 
 ---
 
