@@ -1,8 +1,10 @@
 import re
-from datetime import datetime
 from dataclasses import dataclass
+from datetime import datetime
 from typing import List
+
 from pytz import timezone
+
 
 @dataclass
 class Angriff:
@@ -19,7 +21,7 @@ class SosParser:
         zeilen = text.splitlines()
         zieldorf_pattern = re.compile(r"\[b\]Dorf:\[/b\]\s*\[coord\](\d{3}\|\d{3})\[/coord\]")
         angriff_pattern = re.compile(
-            r"\[command\]attack\[/command\] (.*?) \| .*?\[coord\](\d{3}\|\d{3})\[/coord\] --> Ankunftszeit: (\d{2}\.\d{2}\.\d{2}) (\d{2}:\d{2}:\d{2})"
+            r"\[command\]attack[^\[]*\[/command\](.*?)\[coord\](\d{3}\|\d{3})\[/coord\] --> Ankunftszeit: (\d{2}\.\d{2}\.\d{2}) (\d{2}:\d{2}:\d{2})"
         )
 
         berlin = timezone("Europe/Berlin")
