@@ -1,5 +1,6 @@
 import sys
 
+
 def resource_path(relative_path):
     """ Pfad zu Ressourcen (für PyInstaller-kompatible Nutzung) """
     try:
@@ -8,19 +9,21 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
-from PIL import Image, ImageTk
-import os
 import json
+import os
+import tkinter as tk
 from datetime import datetime, timedelta
+from tkinter import filedialog, messagebox, ttk
+
 import pytz
 import requests
 from bs4 import BeautifulSoup
+from PIL import Image, ImageTk
 
-from sos_parser import SosParser
 from eigene_truppen_parser import EigeneTruppenParser
+from sos_parser import SosParser
 from tab_matching import TabMatching
+
 
 class StammGUI:
     if getattr(sys, 'frozen', False):
@@ -60,7 +63,7 @@ class StammGUI:
         self.welt_id_entry = ttk.Entry(self.tk_root, width=5)
         self.welt_id_entry.grid(row=0, column=3, sticky="nw", padx=5, pady=(2, 2))
 
-        ttk.Label(self.tk_root, text="Level:").grid(row=1, column=2, sticky="nw", padx=5, pady=(2, 2))
+        ttk.Label(self.tk_root, text="LZ-Multiplikator(%):").grid(row=1, column=2, sticky="nw", padx=5, pady=(2, 2))
         self.boost_entry = ttk.Entry(self.tk_root, width=5)
         self.boost_entry.insert(0, "0")
         self.boost_entry.grid(row=1, column=3, sticky="nw", padx=5, pady=(2, 2))
@@ -212,9 +215,16 @@ class StammGUI:
             bis_dt = pytz.timezone("Europe/Berlin").localize(bis_dt) if bis_dt else None
 
             try:
-                self.boost_level = int(self.boost_entry.get().strip())
+                boost_val = int(self.boost_entry.get().strip())
+                if 0 <= boost_val <= 100:
+                    self.boost_level = 1 + (boost_val / 100)
+                else:
+                    self.boost_level = 1.0
+                    print("Boost (%): Bitte Wert zwischen 0 und 100 eingeben.")
+                    messagebox.showerror("Fehler", "LZ-Multiplikator (%): Bitte Wert zwischen 0 und 100 eingeben.")
             except ValueError:
-                self.boost_level = 0
+                self.boost_level = 1.0
+                print("Boost (%): Ungültiger Wert, Standardwert 0% verwendet.")
 
             self.matches = TabMatching.finde_tabs(
                 angriffe=angriffe,
